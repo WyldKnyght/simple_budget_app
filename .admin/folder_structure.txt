@@ -1,0 +1,60 @@
+m:\dev_env\simple_budget_app
+├── .env
+├── .gitignore
+├── LICENSE
+├── README.md
+├── databases
+│   └── simple_budget.db
+├── docs
+├── requirements.txt
+├── simple_budget.db
+├── src
+│   ├── configs
+│   │   ├── account_types.json
+│   │   ├── app_config.py
+│   │   ├── db_config.py
+│   │   ├── db_schema.sql
+│   │   ├── settings_config.py
+│   │   └── ui_config.py
+│   ├── controllers
+│   │   ├── budget_tab_controller.py
+│   │   ├── database_components
+│   │   │   ├── __init__.py
+│   │   │   ├── account_operations.py
+│   │   │   ├── category_operations.py
+│   │   │   ├── expense_operations.py
+│   │   │   ├── table_operations.py
+│   │   │   └── transaction_operations.py
+│   │   ├── database_controllers.py
+│   │   ├── model_manager.py
+│   │   ├── reports_tab_controller.py
+│   │   ├── settings_tab_components
+│   │   │   ├── account_method.py
+│   │   │   ├── category_method.py
+│   │   │   └── expense_method.py
+│   │   ├── settings_tab_controller.py
+│   │   └── transactions_tab_controller.py
+│   ├── main.py
+│   ├── utils
+│   │   ├── __init__.py
+│   │   ├── add_defaults_to_db.py
+│   │   ├── create_db_tables.py
+│   │   ├── custom_logging.py
+│   │   └── databases
+│   │       └── simple_budget.db
+│   └── views
+│       ├── budget_tab.py
+│       ├── main_window.py
+│       ├── reports_tab.py
+│       ├── settings_tab.py
+│       ├── settings_tab_components
+│       │   ├── account_dialog.py
+│       │   ├── accounts_tab.py
+│       │   ├── categories_tab.py
+│       │   ├── category_dialog.py
+│       │   ├── expense_dialog.py
+│       │   └── expenses_tab.py
+│       └── transactions_tab.py
+└── tests
+
+Script last modified: 2024-09-16 19:29:56

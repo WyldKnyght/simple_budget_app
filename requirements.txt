@@ -1,0 +1,4 @@
+treelib
+python-dotenv
+PyQt6
+rich
