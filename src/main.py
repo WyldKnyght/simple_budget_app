@@ -1,24 +1,25 @@
 # src/main.py
 import sys
 from PyQt6.QtWidgets import QApplication
-from utils.custom_logging import setup_logging, logger
-from views.main_window import MainWindow
+from user_interface.main_window import MainWindow
+from controllers.database_controllers import db_manager
 
 def main():
-    setup_logging()
-    logger.info("Initializing application...")
-
     app = QApplication(sys.argv)
-
-    try:
-        main_window = MainWindow()
-        main_window.show()
-
-        logger.info("Application initialized successfully.")
-        sys.exit(app.exec())
-    except Exception as e:
-        logger.error(f"An error occurred during application initialization: {str(e)}", exc_info=True)
-        sys.exit(1)
+    
+    # Initialize database connection
+    db_manager.connect()
+    db_manager.create_tables()
+    
+    window = MainWindow()
+    window.show()
+    
+    exit_code = app.exec()
+    
+    # Close database connection
+    db_manager.close()
+    
+    sys.exit(exit_code)
 
 if __name__ == "__main__":
     main()
