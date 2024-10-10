@@ -1,5 +1,4 @@
-# src/user_interface/common/show_progress_dialog
-
+# src/user_interface/common/show_progress_dialog.py
 from PyQt6.QtWidgets import QProgressDialog
 from PyQt6.QtCore import Qt
 

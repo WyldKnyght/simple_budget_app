@@ -11,21 +11,55 @@ m:\dev_env\simple_budget_app
 ├── src
 │   ├── configs
 │   │   ├── default_settings.py
-│   │   └── path_config.py
+│   │   ├── path_config.py
+│   │   └── ui_settings.ini
 │   ├── controllers
-│   │   ├── database_controllers.py
-│   │   └── settings_tab_controller.py
+│   │   ├── common
+│   │   │   └── entity_controller.py
+│   │   ├── db_operations
+│   │   │   ├── database_connection.py
+│   │   │   ├── database_initializer.py
+│   │   │   ├── database_manager.py
+│   │   │   ├── operation_registry.py
+│   │   │   └── query_executor.py
+│   │   ├── settings_tab_controllers
+│   │   │   ├── accounts_controller.py
+│   │   │   ├── categories_controller.py
+│   │   │   └── expenses_controller.py
+│   │   ├── ui_operations
+│   │   │   ├── main_window_controller.py
+│   │   │   └── settings_tab_controller.py
+│   │   └── validators
+│   │       ├── account_validator.py
+│   │       ├── category_validator.py
+│   │       └── expense_validator.py
 │   ├── main.py
+│   ├── services
+│   │   └── database_reset_service.py
 │   ├── user_interface
+│   │   ├── common
+│   │   │   ├── base_tab.py
+│   │   │   ├── show_progress_dialog.py
+│   │   │   └── table_widget.py
 │   │   ├── main_window.py
+│   │   ├── main_window_modules
+│   │   │   └── create_menu_bar.py
 │   │   ├── settings_tab.py
-│   │   ├── settings_tab_components
-│   │   │   ├── accounts_dialog.py
-│   │   │   ├── accounts_tab.py
-│   │   │   ├── categories_dialog.py
-│   │   │   ├── categories_tab.py
-│   │   │   └── expenses_tab.py
-│   │   └── transactions_tab.py
+│   │   └── settings_tab_modules
+│   │       ├── accounts_tab.py
+│   │       ├── accounts_tab_modules
+│   │       │   ├── accounts_dialog.py
+│   │       │   ├── accounts_manager.py
+│   │       │   └── accounts_model.py
+│   │       ├── categories_tab.py
+│   │       ├── categories_tab_modules
+│   │       │   ├── categories_dialog.py
+│   │       │   ├── categories_manager.py
+│   │       │   └── categories_model.py
+│   │       ├── expenses_tab.py
+│   │       └── expenses_tab_modules
+│   │           ├── expense_dialog.py
+│   │           └── expenses_manager.py
 │   └── utils
 │       ├── __init__.py
 │       └── custom_logging
@@ -37,5 +71,3 @@ m:\dev_env\simple_budget_app
 │           ├── setup_file_logging.py
 │           └── setup_logging.py
 └── tests
-
-Script last modified: 2024-10-03 11:36:16

@@ -1,5 +1,4 @@
 # src/configs/default_settings.py
-
 DEFAULT_ACCOUNT_TYPES = [
     "Checking",
     "Savings",
@@ -85,8 +84,12 @@ DEFAULT_CATEGORIES = [
 ]
 
 DEFAULT_EXPENSE_FREQUENCIES = [
-    "One-time",
+    "Daily",
     "Weekly",
+    "Bi-weekly",
     "Monthly",
-    "Yearly"
+    "Bi-monthly",
+    "Quarterly",
+    "Annually"
+    "One-time"
 ]

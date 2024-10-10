@@ -1,36 +1,26 @@
 # src/user_interface/settings_tab.py
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QTabWidget
-from .settings_tab_components.accounts_tab import AccountsTab
-from .settings_tab_components.categories_tab import CategoriesTab
-from .settings_tab_components.expenses_tab import ExpensesTab
-from controllers.settings_tab_controller import SettingsTabController
+from PyQt6.QtWidgets import QTabWidget
+from controllers.settings_tab_controllers.accounts_controller import AccountsController
+from controllers.settings_tab_controllers.categories_controller import CategoriesController
+from controllers.settings_tab_controllers.expenses_controller import ExpensesController
+from controllers.ui_operations.settings_tab_controller import SettingsTabController
+from .common.base_tab import BaseTab
 
-class SettingsTab(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.controller = SettingsTabController()
-        self.init_ui()
-
+class SettingsTab(BaseTab):
+    def __init__(self, db_manager):
+        super().__init__(db_manager, SettingsTabController) 
+        self.db_manager = db_manager
+        
     def init_ui(self):
-        layout = QVBoxLayout()
-
+        super().init_ui()
         self.settings_tabs = QTabWidget()
-        self.accounts_tab = AccountsTab(self.controller)
-        self.categories_tab = CategoriesTab(self.controller)
-        self.expenses_tab = ExpensesTab(self.controller)
+
+        self.accounts_tab = BaseTab(self.db_manager, AccountsController)
+        self.categories_tab = BaseTab(self.db_manager, CategoriesController)
+        self.expenses_tab = BaseTab(self.db_manager, ExpensesController)
 
         self.settings_tabs.addTab(self.accounts_tab, "Accounts")
         self.settings_tabs.addTab(self.categories_tab, "Categories")
         self.settings_tabs.addTab(self.expenses_tab, "Expenses")
 
-        layout.addWidget(self.settings_tabs)
-        self.setLayout(layout)
-
-    def load_accounts(self):
-        self.accounts_tab.load_accounts()
-
-    def load_categories(self):
-        self.categories_tab.load_categories()
-
-    def load_expenses(self):
-        self.expenses_tab.load_expenses()
+        self.layout().addWidget(self.settings_tabs)

@@ -1,6 +1,6 @@
-# src/user_interface/settings_tab_components/expense_dialog.py
+# src/user_interface/settings_tab_modules/expenses_tab_modules/expense_dialog.py
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFormLayout, QLineEdit, 
-                             QComboBox, QPushButton, QDateEdit)
+                             QComboBox, QPushButton, QDateEdit, QDoubleSpinBox, QMessageBox)
 from PyQt6.QtCore import QDate
 from configs.default_settings import DEFAULT_EXPENSE_FREQUENCIES
 
@@ -16,14 +16,22 @@ class ExpenseDialog(QDialog):
         layout = QFormLayout()
 
         self.name_input = QLineEdit()
+        self.name_input.setPlaceholderText("Enter expense name")
+
         self.category_input = QComboBox()
+        self.category_input.addItems([cat[1] for cat in self.categories])
+
         self.due_date_input = QDateEdit()
         self.due_date_input.setCalendarPopup(True)
-        self.frequency_input = QComboBox()
-        self.amount_input = QLineEdit()
+        self.due_date_input.setDate(QDate.currentDate())  # Set default to today
 
-        self.category_input.addItems([cat[1] for cat in self.categories])
+        self.frequency_input = QComboBox()
         self.frequency_input.addItems(DEFAULT_EXPENSE_FREQUENCIES)
+
+        self.amount_input = QDoubleSpinBox()
+        self.amount_input.setRange(0, 1000000)
+        self.amount_input.setDecimals(2)
+        self.amount_input.setPrefix("$")
 
         layout.addRow("Expense Name:", self.name_input)
         layout.addRow("Category:", self.category_input)
@@ -40,7 +48,7 @@ class ExpenseDialog(QDialog):
         layout.addRow(button_layout)
         self.setLayout(layout)
 
-        self.ok_button.clicked.connect(self.accept)
+        self.ok_button.clicked.connect(self.validate_and_accept)
         self.cancel_button.clicked.connect(self.reject)
 
         if self.expense:
@@ -51,4 +59,23 @@ class ExpenseDialog(QDialog):
         self.category_input.setCurrentIndex(self.category_input.findText(self.expense['category_name']))
         self.due_date_input.setDate(QDate.fromString(self.expense['due_date'], "yyyy-MM-dd"))
         self.frequency_input.setCurrentIndex(self.frequency_input.findText(self.expense['frequency']))
-        self.amount_input.setText(str(self.expense['amount']))
+        self.amount_input.setValue(float(self.expense['amount']))
+
+    def validate_and_accept(self):
+        if not self.name_input.text():
+            QMessageBox.warning(self, "Invalid Input", "Please enter an expense name.")
+            return
+        if self.amount_input.value() == 0:
+            QMessageBox.warning(self, "Invalid Input", "Please enter a non-zero amount.")
+            return
+        self.accept()
+
+    def get_expense_data(self):
+        return {
+            'expense_name': self.name_input.text(),
+            'category_id': self.categories[self.category_input.currentIndex()][0],
+            'category_name': self.category_input.currentText(),
+            'due_date': self.due_date_input.date().toString("yyyy-MM-dd"),
+            'frequency': self.frequency_input.currentText(),
+            'amount': self.amount_input.value()
+        }
