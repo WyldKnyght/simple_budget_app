@@ -3,11 +3,12 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QFormLayout, QLineEdit,
                              QComboBox, QPushButton, QDateEdit, QDoubleSpinBox, QMessageBox)
 from PyQt6.QtCore import QDate
 from configs.default_settings import DEFAULT_EXPENSE_FREQUENCIES
+from configs.constants import EXPENSE_DIALOG_TITLE
 
 class ExpenseDialog(QDialog):
     def __init__(self, parent=None, categories=None, expense=None):
         super().__init__(parent)
-        self.setWindowTitle("Add/Edit Expense")
+        self.setWindowTitle(EXPENSE_DIALOG_TITLE)
         self.categories = categories or []
         self.expense = expense
         self.init_ui()

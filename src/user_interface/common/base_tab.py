@@ -7,7 +7,6 @@ class BaseTab(QWidget):
         self.db_manager = db_manager
         if controller_class is not None:
             self.controller = controller_class(db_manager)
-        self.init_ui()
 
     def init_ui(self):
         layout = QVBoxLayout()

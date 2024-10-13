@@ -1,42 +1,26 @@
 # src/user_interface/settings_tab_modules/accounts_tab_modules/accounts_dialog.py
-from PyQt6.QtWidgets import (QPushButton, QHBoxLayout, QDialog, QFormLayout, QLineEdit)
 from utils.custom_logging import logger, error_handler
 from ...common.base_dialog import BaseDialog
 
 class AccountDialog(BaseDialog):
-    def __init__(self, parent=None, columns=None):
+    def __init__(self, parent=None, columns=None, account_data=None):
         super().__init__(parent, columns)
         self.setWindowTitle("Add/Edit Account")
-        self.columns = columns
+        self.account_data = account_data
         self.init_ui()
+        if self.account_data:
+            self.populate_fields()
 
     def init_ui(self):
-        layout = QFormLayout()
-        self.inputs = {}
+        super().init_ui()  # Call the parent's init_ui method
+        self.setWindowTitle("Add/Edit Account")
 
-        for column in self.columns:
-            if column['name'] != 'id':
-                if column['type'].upper() == 'VARCHAR':
-                    self.inputs[column['name']] = QLineEdit()
-                elif column['type'].upper() == 'TEXT':
-                    self.inputs[column['name']] = QLineEdit()
-                # Add more type checks as needed
-
-                layout.addRow(f"{column['name'].capitalize()}:", self.inputs[column['name']])
-
-        buttons = QHBoxLayout()
-        self.ok_button = QPushButton("OK")
-        self.cancel_button = QPushButton("Cancel")
-        buttons.addWidget(self.ok_button)
-        buttons.addWidget(self.cancel_button)
-
-        layout.addRow(buttons)
-        self.setLayout(layout)
-
-        self.ok_button.clicked.connect(self.accept)
-        self.cancel_button.clicked.connect(self.reject)
+    def populate_fields(self):
+        for name, input_field in self.inputs.items():
+            if name in self.account_data:
+                input_field.setText(str(self.account_data[name]))
 
     @error_handler
-    def get_account_data(self):
+    def get_data(self):
         logger.info("Getting account data")
-        return {name: input.text() for name, input in self.inputs.items()}
+        return super().get_data()  # Use the parent's get_data method
