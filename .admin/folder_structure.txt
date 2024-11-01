@@ -5,50 +5,56 @@ m:\dev_env\simple_budget_app
 ├── README.md
 ├── data
 │   ├── db_schema.sql
+│   ├── old_simple_budget.db
 │   └── simple_budget.db
 ├── docs
 │   ├── custom_logging_system.md
-│   ├── database_management.md
+│   ├── database_managment_system.md
+│   ├── database_new.md
 │   ├── entity_functionality.md
-│   └── schema_management.md
+│   └── schema_new.md
 ├── requirements.txt
 ├── src
 │   ├── configs
 │   │   ├── constants.py
 │   │   ├── default_settings.py
 │   │   ├── path_config.py
-│   │   ├── settings_manager.py
-│   │   └── ui_settings.ini
+│   │   ├── ui_settings.ini
+│   │   └── ui_settings_manager.py
 │   ├── controllers
-│   │   ├── common
-│   │   │   └── entity_controller.py
-│   │   ├── db_operations
-│   │   │   ├── database_connection.py
-│   │   │   ├── database_initializer.py
-│   │   │   ├── database_manager.py
-│   │   │   ├── database_operations.py
-│   │   │   ├── operation_registry.py
-│   │   │   └── query_executor.py
-│   │   ├── schema_controller.py
-│   │   ├── schema_controller_modules
-│   │   │   ├── database_backup.py
-│   │   │   ├── schema_applier.py
-│   │   │   ├── schema_reader.py
-│   │   │   ├── schema_validator.py
-│   │   │   └── table_info_extractor.py
-│   │   ├── settings_tab_controllers
-│   │   │   ├── accounts_controller.py
-│   │   │   ├── categories_controller.py
-│   │   │   └── expenses_controller.py
+│   │   ├── __init__.py
+│   │   ├── database_manager.py
+│   │   ├── database_modules
+│   │   │   ├── __init__.py
+│   │   │   ├── db_backup.py
+│   │   │   ├── db_base_ops.py
+│   │   │   ├── db_connection.py
+│   │   │   ├── db_exceptions.py
+│   │   │   ├── db_initializer.py
+│   │   │   ├── db_logging.py
+│   │   │   ├── db_maintenance_manager.py
+│   │   │   ├── db_operation_registry.py
+│   │   │   ├── db_operations_factory.py
+│   │   │   ├── db_query_executor.py
+│   │   │   ├── db_reset_service.py
+│   │   │   ├── db_structure_manager.py
+│   │   │   ├── db_table_info_ops.py
+│   │   │   ├── db_table_mod_ops.py
+│   │   │   └── default_data_populator.py
+│   │   ├── schema_manager.py
 │   │   └── ui_operations
+│   │       ├── __init__.py
+│   │       ├── accounts_controller.py
+│   │       ├── categories_controller.py
+│   │       ├── entity_controller.py
+│   │       ├── expenses_controller.py
 │   │       ├── main_window_controller.py
 │   │       └── settings_tab_controller.py
 │   ├── main.py
-│   ├── services
-│   │   ├── database_reset_service.py
-│   │   └── database_reset_thread.py
 │   ├── user_interface
+│   │   ├── __init__.py
 │   │   ├── common
+│   │   │   ├── __init__.py
 │   │   │   ├── base_dialog.py
 │   │   │   ├── base_tab.py
 │   │   │   ├── show_about_dialog.py
@@ -56,21 +62,27 @@ m:\dev_env\simple_budget_app
 │   │   │   └── table_widget.py
 │   │   ├── main_window.py
 │   │   ├── main_window_modules
+│   │   │   ├── __init__.py
 │   │   │   └── create_menu_bar.py
 │   │   ├── settings_tab.py
 │   │   └── settings_tab_modules
+│   │       ├── __init__.py
 │   │       ├── accounts_tab.py
 │   │       ├── accounts_tab_modules
+│   │       │   ├── __init__.py
 │   │       │   ├── accounts_dialog.py
 │   │       │   ├── accounts_manager.py
 │   │       │   └── accounts_model.py
 │   │       ├── categories_tab.py
 │   │       ├── categories_tab_modules
+│   │       │   ├── __init__.py
 │   │       │   ├── categories_dialog.py
 │   │       │   ├── categories_manager.py
-│   │       │   └── categories_model.py
+│   │       │   ├── categories_model.py
+│   │       │   └── category_item.py
 │   │       ├── expenses_tab.py
 │   │       └── expenses_tab_modules
+│   │           ├── __init__.py
 │   │           ├── expense_dialog.py
 │   │           └── expenses_manager.py
 │   └── utils
@@ -84,13 +96,5 @@ m:\dev_env\simple_budget_app
 │           ├── setup_file_logging.py
 │           └── setup_logging.py
 └── tests
-    ├── base_controller.py
-    ├── reset_database.py
-    ├── schema_controller.py
-    ├── schema_utils.py
-    └── validators
-        ├── account_validator.py
-        ├── category_validator.py
-        └── expense_validator.py
 
-Script last modified: 2024-10-12 17:55:58
+Script last modified: 2024-10-18 15:52:24

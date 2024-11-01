@@ -1,79 +1,89 @@
-## Database Management System
+# Database Documentation
 
-## Single Responsibility Principle (SRP)
+This document provides an overview of the database management system implemented in the Simple Family Budget Tracking App.
 
-The code has been refactored to better adhere to SRP:
+## Overview
 
-1. **DatabaseManager**: Acts as a facade, delegating specific responsibilities to other classes.
-2. **DatabaseConnection**: Handles database connection and basic query execution.
-3. **QueryExecutor**: Focuses on executing queries.
-4. **OperationRegistry**: Manages registration and retrieval of operations.
+The database layer is responsible for managing all interactions with the SQLite database. It includes components for establishing connections, initializing the database schema, executing queries, and handling errors.
 
-This separation ensures that each class has a single, well-defined responsibility.
+## Important Note on Schema Changes
 
-## Separation of Concerns (SoC)
-1. Data access is handled by DatabaseConnection and QueryExecutor.
-2. Business logic is managed in the controllers (e.g., AccountsController, CategoriesController).
-3. UI elements are not present in this backend code, indicating proper separation.
+The database schema serves as the single source of truth for the database structure. Any changes to the database structure should be made in the schema file only. For details on managing and interacting with the schema, please refer to the [Schema Management Documentation](./schema_management.md).
 
-## DRY (Don't Repeat Yourself)
-1. Common database operations are centralized in DatabaseConnection and QueryExecutor.
-2. The OperationRegistry allows for reusable operations across the application.
+## Components
 
-## Efficiency
-1. Use of SQLite for database operations, which is lightweight and efficient for local storage.
-2. Proper use of parameterized queries to prevent SQL injection and improve performance.
+### 1. DatabaseManager
 
-## Code Organization
-1. **Configs**: Contains path configurations (path_config.py).
-2. **Controllers**: Houses database operations and specific controllers.
-3. **Utils**: Includes utility functions like schema_utils.py.
+- **Purpose**: Serves as the main interface for all database operations.
+- **Responsibilities**:
+  - Manage connections to the database.
+  - Initialize the database using a predefined schema.
+  - Execute SQL queries.
 
-## Additional Information
-1. **Error Handling**: The code includes error handling and logging, which is crucial for debugging and maintaining the application.
+#### Methods:
+- `get_connection()`
+  - Returns a connection to the SQLite database.
+  - Raises `ConnectionError` if unable to establish a connection.
 
-2. **Flexibility**: The use of a schema file (SCHEMA_PATH) allows for easy database structure modifications.
+- `initialize_database()`
+  - Initializes the database using the schema defined in a separate file.
+  - Raises `InitializationError` if there's an issue during initialization.
 
-3. **Initialization**: The DatabaseInitializer class provides a clean way to set up the database and register operations.
+- `execute_query(query, params=None)`
+  - Executes a SQL query on the database.
+  - Returns a cursor object containing the query results.
+  - Raises `QueryExecutionError` if there's an issue executing the query.
 
-4. **Environment Variables**: The use of dotenv for configuration management is a good practice for maintaining different environments.
+---
 
-5. **Type Hinting**: The code uses type hints, improving readability and allowing for better IDE support.
+### 2. DatabaseConnections
 
-# Usage of the database management system
+- **Purpose**: Manages connections to the SQLite database.
 
-## EntityController (common/entity_controller.py)
-This class serves as a base controller for entity operations and uses the database management system correctly:
+#### Methods:
+- `get_connection()`
+  - Establishes and returns a connection to the SQLite database.
+  - Raises `ConnectionError` if unable to connect.
 
-1. It initializes with `db_ops` and `table_name`, which are used consistently throughout the methods.
-2. The `_get_columns_from_schema` method reads the schema file to dynamically determine table columns, promoting flexibility.
-3. CRUD operations (add, get, update, remove) use the `db_ops` methods for query execution.
-4. Error handling and logging are implemented throughout.
+---
 
-## SettingsTabController (tab_operations/settings_tab_operations.py)
-This controller properly uses the database management system through the `db_manager`:
+### 3. DatabaseInitializer
 
-1. It initializes with `db_manager` and uses its operations (accounts_ops, categories_ops, expenses_ops) for all database interactions.
-2. Methods like `get_category_tree`, `get_accounts`, and `get_expenses` correctly delegate to the appropriate database operations.
-3. CRUD operations for accounts, categories, and expenses are properly implemented using the respective database operations.
+- **Purpose**: Handles initialization of the database schema.
 
-## AccountsController (settings_tab_controllers/accounts_controller.py)
-This controller extends `EntityController` and uses the database system correctly:
+#### Methods:
+- `initialize_database()`
+  - Reads the schema from the source-of-truth file and initializes the database.
+  - Raises `InitializationError` if there's an issue reading the schema or executing SQL commands.
 
-1. It uses `get_table_name_by_prefix` to dynamically get the table name, promoting flexibility.
-2. The `get_account_by_name` method uses `db_ops.fetch_one` for querying, which is correct.
+---
 
-## CategoriesController (settings_tab_controllers/categories_controller.py)
-This controller also extends `EntityController` and uses the database system properly:
+### 4. QueryExecutor
 
-1. It uses `get_table_name_by_prefix` for the table name.
-2. The `get_category_tree` method uses `get_entities` from the base class to fetch all categories and then processes them in memory to create the tree structure.
+- **Purpose**: Executes SQL queries against the database.
 
-## ExpensesController (settings_tab_controllers/expenses_controller.py)
-This controller demonstrates advanced usage of the database management system:
+#### Methods:
+- `execute_query(query, params=None)`
+  - Executes a given SQL query and returns results via a cursor.
+  - Raises `QueryExecutionError` if there's an issue executing the query.
 
-1. It extends `EntityController` and uses `get_table_name_by_prefix` for the table name.
-2. The `_ensure_indexes` method creates database indexes, which is good for performance.
-3. It implements pagination in `get_expenses`, which is important for handling large datasets.
-4. Methods like `get_expenses_by_category` and `get_expenses_by_date_range` show proper use of parameterized queries.
-5. Error handling and logging are consistently implemented.
+---
+
+### 5. Custom Exceptions
+
+The following custom exceptions are defined for handling specific error scenarios:
+
+- **DatabaseError**: Base class for all database-related exceptions.
+- **ConnectionError**: Raised when there's an issue connecting to the database.
+- **InitializationError**: Raised when there's an issue initializing the database.
+- **QueryExecutionError**: Raised when there's an issue executing a SQL query.
+
+## Best Practices
+
+1. Always use the DatabaseManager for database operations to ensure consistent error handling and connection management.
+2. Refer to the [Schema Management Documentation](./schema_management.md) when making changes to the database structure.
+3. Use parameterized queries to prevent SQL injection vulnerabilities.
+
+## Conclusion
+
+This documentation provides an overview of how to interact with and manage the SQLite database within the Simple Family Budget Tracking App. For details on schema management and changes, please refer to the Schema Management Documentation. For further details on usage or specific implementation questions, please refer to the source code or reach out to the development team.

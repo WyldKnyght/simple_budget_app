@@ -1,96 +1,70 @@
-## Schema Management System
+# Schema Management Documentation
 
-### Single Responsibility Principle (SRP)
+This document provides an overview of the schema management system implemented in the Simple Family Budget Tracking App.
 
-1. **SchemaController**: Acts as a facade, coordinating schema-related operations.
-2. **SchemaReader**: Handles reading and parsing the schema file.
-3. **TableInfoExtractor**: Focuses on extracting detailed information from table definitions.
-4. **SchemaValidator**: Manages schema validation and comparison.
-5. **SchemaApplier**: Handles the application of schema changes.
-6. **DatabaseBackup**: Manages database backup operations.
+## Overview
 
-This separation ensures that each class has a single, well-defined responsibility.
+The schema management layer is responsible for handling interactions with the database schema. It includes components for loading the schema, retrieving table names, and getting column definitions.
 
-### Separation of Concerns (SoC)
+## Source of Truth
 
-1. Schema file reading is handled by SchemaReader.
-2. Table information extraction is managed by TableInfoExtractor.
-3. Schema validation and comparison are handled by SchemaValidator.
-4. Schema changes are applied by SchemaApplier.
-5. Database backup is managed by DatabaseBackup.
+The database schema file serves as the single source of truth for the database structure. This means:
 
-### DRY (Don't Repeat Yourself)
+- All database structural changes should be made in the schema file only.
+- The application relies on this schema file to understand the database structure.
+- When making changes to the database structure, only the schema file needs to be updated.
+- This approach ensures consistency across the application and simplifies database management.
 
-1. Common schema operations are centralized in their respective classes.
-2. The SchemaController delegates to specialized classes, avoiding code duplication.
+## Components
 
-### Efficiency
+### 1. SchemaManager
 
-1. Use of regular expressions for parsing schema definitions.
-2. Efficient comparison of schema and database structures.
+- **Purpose**: Serves as the main interface for schema-related operations.
+- **Responsibilities**:
+  - Load the database schema from the source-of-truth file.
+  - Retrieve the names of tables defined in the schema.
+  - Get the columns for a specific table.
 
-### Code Organization
+#### Methods:
+- `load_schema()`
+  - Loads the database schema from the predefined schema file (source of truth).
+  - Raises an error if there is an issue reading the schema file.
 
-1. **SchemaController**: Main entry point for schema management operations.
-2. **Schema Controller Modules**: Specialized classes for specific schema-related tasks.
+- `get_table_names()`
+  - Returns a list of table names defined in the loaded schema.
+  - Raises an error if there is an issue processing the schema.
 
-### Additional Information
+- `get_table_columns(table_name)`
+  - Returns a list of column names for a specified table.
+  - Raises an error if there is an issue processing the schema or if the table does not exist.
 
-1. **Error Handling**: The code includes error handling and logging, crucial for debugging and maintaining the application.
-2. **Flexibility**: The use of a schema file allows for easy database structure modifications.
-3. **Version Control**: The system includes methods to manage and update schema versions.
-4. **Backup Functionality**: Includes a method to create database backups before making significant changes.
+---
 
-### Usage of the Schema Management System
+### 2. Schema Operations
 
-#### SchemaController
+The following functions are defined to handle specific operations related to the database schema:
 
-This class serves as the main interface for schema management:
+- **get_schema()**
+  - Reads and returns the entire database schema from the source-of-truth schema file.
+  - Raises an error if there is an issue reading the file.
 
-1. It initializes with `db_ops` and creates instances of specialized classes.
-2. Provides methods for table and column information retrieval.
-3. Offers schema validation and comparison functionality.
-4. Manages the application of schema changes.
-5. Handles database backup operations.
+- **get_table_names(schema)**
+  - Extracts and returns a list of table names from a given schema string.
 
-#### SchemaReader
+- **get_table_columns(schema, table_name)**
+  - Extracts and returns a list of column names for a specified table from a given schema string.
+  - Returns `None` if the specified table does not exist in the schema.
 
-Responsible for reading and parsing the schema file:
+## Best Practices
 
-1. Reads the schema file from a configured path.
-2. Provides methods to extract CREATE TABLE statements and table names.
+1. **Schema Updates**: When the database structure needs to change, update only the schema file. The SchemaManager will then reflect these changes throughout the application.
 
-#### TableInfoExtractor
+2. **Consistency**: Always use the SchemaManager to retrieve information about the database structure. This ensures that all parts of the application are working with the same, up-to-date structural information.
 
-Extracts detailed information from table definitions:
+3. **Version Control**: Keep the schema file under version control to track changes over time.
 
-1. Parses column information including name, type, and constraints.
-2. Extracts foreign key information from table definitions.
+4. **Migration Management**: Consider implementing a migration system for managing schema changes in a production environment.
 
-#### SchemaValidator
+## Conclusion
 
-Handles schema validation and comparison:
-
-1. Compares schema tables with actual database tables.
-2. Validates column definitions between schema and database.
-3. Generates detailed reports of schema differences.
-
-#### SchemaApplier
-
-Manages the application of schema changes:
-
-1. Creates missing tables based on schema definitions.
-2. Adds missing columns to existing tables.
-3. Updates the schema version after successful changes.
-
-#### DatabaseBackup
-
-Handles database backup operations:
-
-1. Creates a backup of the current database to a specified path.
-2. Provides error handling and logging for backup operations.
-
-This schema management system provides a robust and flexible way to manage database schemas, ensuring data integrity and facilitating easy database structure updates.
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/4493775/75b0b995-86fc-4359-84d6-5d3f1f4c501d/paste.txt
+This documentation provides an overview of how to manage and interact with the database schema within the Simple Family Budget Tracking App. By maintaining the schema file as the single source of truth, we ensure consistency and simplify database structure management across the application. For further details on usage or specific implementation questions, please refer to the source code or reach out to the development team.

@@ -9,6 +9,7 @@ class EnvSettings:
         'PROJECT_ROOT': 'PROJECT_ROOT',
         'ENTRY_POINT': 'ENTRY_POINT',
         'DB_PATH': 'DB_PATH',
+        'BACKUP_PATH': 'BACKUP_PATH',
         'SCHEMA_PATH': 'SCHEMA_PATH',
         'DEFAULT_SETTINGS_PATH': 'DEFAULT_SETTINGS_PATH',
         'UI_INI_PATH': 'UI_INI_PATH'

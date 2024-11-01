@@ -2,7 +2,6 @@ import os
 from treelib import Tree
 import datetime
 
-
 def generate_folder_structure(root_dir, output_file=None, excluded_dirs=None):
     tree = Tree()
     tree.create_node(root_dir, root_dir)  # Create the root node
