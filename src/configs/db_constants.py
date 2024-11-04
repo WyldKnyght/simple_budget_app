@@ -1,4 +1,4 @@
-# src/configs/constants.py
+# src/configs/db_constants.py
 
 # Database tables
 TABLE_ACCOUNTS = "Accounts"

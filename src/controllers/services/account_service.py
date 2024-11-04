@@ -1,7 +1,7 @@
 # src/controllers/services/account_service.py
 from data_access.db_account_operations import AccountOperations
 from data_access.schema_manager import SchemaManager
-from configs.constants import TABLE_ACCOUNTS, FIELD_ACCOUNT_TYPE
+from configs.db_constants import TABLE_ACCOUNTS, FIELD_ACCOUNT_TYPE
 from utils.custom_logging import error_handler
 
 class AccountService:

@@ -1,6 +1,6 @@
 # src\data_access\db_account_operations.py
 from .database_manager import DatabaseManager
-from configs.constants import (
+from configs.db_constants import (
     TABLE_ACCOUNTS, FIELD_ACCOUNT_ID, FIELD_ACCOUNT_NAME, 
     FIELD_ACCOUNT_NUMBER, FIELD_ACCOUNT_TYPE,
     SQL_INSERT_ACCOUNT, SQL_SELECT_ACCOUNT_BY_ID, SQL_SELECT_ALL_ACCOUNTS,

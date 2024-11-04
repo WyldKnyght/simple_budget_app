@@ -1,6 +1,6 @@
 # src\data_access\db_expense_operations.py
 from .database_manager import DatabaseManager
-from configs.constants import (
+from configs.db_constants import (
     TABLE_EXPENSES, FIELD_EXPENSE_ID, FIELD_EXPENSE_NAME, FIELD_CATEGORY_ID,
     FIELD_DUE_DATE, FIELD_FREQUENCY, FIELD_AMOUNT,
     SQL_INSERT_EXPENSE, SQL_SELECT_EXPENSE_BY_ID, SQL_SELECT_ALL_EXPENSES,

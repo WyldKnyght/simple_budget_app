@@ -1,7 +1,7 @@
 # src/controllers/services/transaction_service.py
 from data_access.db_transaction_operations import TransactionOperations
 from data_access.schema_manager import SchemaManager
-from configs.constants import TABLE_TRANSACTIONS
+from configs.db_constants import TABLE_TRANSACTIONS
 from utils.custom_logging import error_handler
 
 class TransactionService:

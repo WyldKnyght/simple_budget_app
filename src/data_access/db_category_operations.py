@@ -1,6 +1,6 @@
 # src\data_access\db_category_operations.py
 from .database_manager import DatabaseManager
-from configs.constants import (
+from configs.db_constants import (
     TABLE_CATEGORIES, FIELD_CATEGORY_ID, FIELD_CATEGORY_NAME, FIELD_PARENT_ID,
     SQL_INSERT_CATEGORY, SQL_SELECT_CATEGORY_BY_ID, SQL_SELECT_ALL_CATEGORIES,
     SQL_UPDATE_CATEGORY, SQL_DELETE_CATEGORY, SQL_SELECT_SUBCATEGORIES

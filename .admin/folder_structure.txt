@@ -5,86 +5,61 @@ m:\dev_env\simple_budget_app
 ├── README.md
 ├── data
 │   ├── db_schema.sql
-│   ├── old_simple_budget.db
 │   └── simple_budget.db
 ├── docs
+│   ├── account_management.md
+│   ├── category_management.md
 │   ├── custom_logging_system.md
-│   ├── database_managment_system.md
-│   ├── database_new.md
-│   ├── entity_functionality.md
-│   └── schema_new.md
+│   ├── database_management.md
+│   ├── expense_management.md
+│   ├── schema_management.md
+│   └── transaction_management.md
 ├── requirements.txt
 ├── src
 │   ├── configs
-│   │   ├── constants.py
-│   │   ├── default_settings.py
+│   │   ├── app_constants.py
+│   │   ├── db_constants.py
+│   │   ├── error_config.py
 │   │   ├── path_config.py
-│   │   ├── ui_settings.ini
-│   │   └── ui_settings_manager.py
+│   │   └── ui_constants.py
 │   ├── controllers
 │   │   ├── __init__.py
-│   │   ├── database_manager.py
-│   │   ├── database_modules
+│   │   ├── account_manager.py
+│   │   ├── category_manager.py
+│   │   ├── expense_manager.py
+│   │   ├── services
 │   │   │   ├── __init__.py
-│   │   │   ├── db_backup.py
-│   │   │   ├── db_base_ops.py
-│   │   │   ├── db_connection.py
-│   │   │   ├── db_exceptions.py
-│   │   │   ├── db_initializer.py
-│   │   │   ├── db_logging.py
-│   │   │   ├── db_maintenance_manager.py
-│   │   │   ├── db_operation_registry.py
-│   │   │   ├── db_operations_factory.py
-│   │   │   ├── db_query_executor.py
-│   │   │   ├── db_reset_service.py
-│   │   │   ├── db_structure_manager.py
-│   │   │   ├── db_table_info_ops.py
-│   │   │   ├── db_table_mod_ops.py
-│   │   │   └── default_data_populator.py
+│   │   │   ├── account_service.py
+│   │   │   ├── category_service.py
+│   │   │   ├── check_and_validate_database.py
+│   │   │   ├── expense_service.py
+│   │   │   ├── menu_bar_service.py
+│   │   │   └── transaction_service.py
+│   │   ├── transaction_manager.py
+│   │   └── ui_main_window_manager.py
+│   ├── data_access
+│   │   ├── __init__.py
+│   │   ├── database_manager.py
+│   │   ├── db_account_operations.py
+│   │   ├── db_category_operations.py
+│   │   ├── db_connections.py
+│   │   ├── db_custom_exceptions.py
+│   │   ├── db_expense_operations.py
+│   │   ├── db_initializer.py
+│   │   ├── db_loader.py
+│   │   ├── db_query_executor.py
+│   │   ├── db_schema_validator.py
+│   │   ├── db_transaction_operations.py
 │   │   ├── schema_manager.py
-│   │   └── ui_operations
-│   │       ├── __init__.py
-│   │       ├── accounts_controller.py
-│   │       ├── categories_controller.py
-│   │       ├── entity_controller.py
-│   │       ├── expenses_controller.py
-│   │       ├── main_window_controller.py
-│   │       └── settings_tab_controller.py
+│   │   └── schema_operations.py
 │   ├── main.py
 │   ├── user_interface
 │   │   ├── __init__.py
-│   │   ├── common
+│   │   ├── dialogs
 │   │   │   ├── __init__.py
-│   │   │   ├── base_dialog.py
-│   │   │   ├── base_tab.py
-│   │   │   ├── show_about_dialog.py
-│   │   │   ├── show_progress_dialog.py
-│   │   │   └── table_widget.py
+│   │   │   └── show_about_dialog.py
 │   │   ├── main_window.py
-│   │   ├── main_window_modules
-│   │   │   ├── __init__.py
-│   │   │   └── create_menu_bar.py
-│   │   ├── settings_tab.py
-│   │   └── settings_tab_modules
-│   │       ├── __init__.py
-│   │       ├── accounts_tab.py
-│   │       ├── accounts_tab_modules
-│   │       │   ├── __init__.py
-│   │       │   ├── accounts_dialog.py
-│   │       │   ├── accounts_manager.py
-│   │       │   └── accounts_model.py
-│   │       ├── categories_tab.py
-│   │       ├── categories_tab_modules
-│   │       │   ├── __init__.py
-│   │       │   ├── categories_dialog.py
-│   │       │   ├── categories_manager.py
-│   │       │   ├── categories_model.py
-│   │       │   └── category_item.py
-│   │       ├── expenses_tab.py
-│   │       └── expenses_tab_modules
-│   │           ├── __init__.py
-│   │           ├── expense_dialog.py
-│   │           └── expenses_manager.py
+│   │   └── menu_bar_builder.py
 │   └── utils
 │       ├── __init__.py
 │       └── custom_logging
@@ -97,4 +72,4 @@ m:\dev_env\simple_budget_app
 │           └── setup_logging.py
 └── tests
 
-Script last modified: 2024-10-18 15:52:24
+Script last modified: 2024-11-04 12:51:04

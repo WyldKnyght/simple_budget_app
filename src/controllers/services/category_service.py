@@ -1,7 +1,7 @@
 # src/controllers/services/category_service.py
 from data_access.db_category_operations import CategoryOperations
 from data_access.schema_manager import SchemaManager
-from configs.constants import TABLE_CATEGORIES, FIELD_CATEGORY_NAME
+from configs.db_constants import TABLE_CATEGORIES, FIELD_CATEGORY_NAME
 from utils.custom_logging import error_handler
 
 class CategoryService:
