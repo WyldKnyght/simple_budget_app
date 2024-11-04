@@ -49,7 +49,7 @@ class MenuBarBuilder:
         self.help_action.triggered.connect(self.ui_controller.show_help)
 
     def update_menu_state(self):
-        db_exists = self.ui_controller.db_manager.schema_validator.database_exists()
+        db_exists = self.ui_controller.db_manager.validation_operations.database_exists()
         self.open_db_action.setEnabled(db_exists)
         self.new_db_action.setEnabled(not db_exists)
         self.reset_db_action.setEnabled(db_exists)

@@ -5,6 +5,7 @@ m:\dev_env\simple_budget_app
 ├── README.md
 ├── data
 │   ├── db_schema.sql
+│   ├── old_simple_budget.db
 │   └── simple_budget.db
 ├── docs
 │   ├── account_management.md
@@ -12,6 +13,7 @@ m:\dev_env\simple_budget_app
 │   ├── custom_logging_system.md
 │   ├── database_management.md
 │   ├── expense_management.md
+│   ├── main_window_ui.md
 │   ├── schema_management.md
 │   └── transaction_management.md
 ├── requirements.txt
@@ -19,6 +21,7 @@ m:\dev_env\simple_budget_app
 │   ├── configs
 │   │   ├── app_constants.py
 │   │   ├── db_constants.py
+│   │   ├── default_settings.py
 │   │   ├── error_config.py
 │   │   ├── path_config.py
 │   │   └── ui_constants.py
@@ -72,4 +75,4 @@ m:\dev_env\simple_budget_app
 │           └── setup_logging.py
 └── tests
 
-Script last modified: 2024-11-04 12:51:04
+Script last modified: 2024-11-04 15:28:53

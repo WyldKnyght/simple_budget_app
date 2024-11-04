@@ -1,8 +1,14 @@
-# src\data_access\db_connections.py
+# src/data_access/db_connections.py
+
 import sqlite3
 from utils.custom_logging import logger, error_handler
 from configs.path_config import DB_PATH
-from configs.error_config import DB_CONNECTION_ERROR, DB_CLOSE_ERROR
+from configs.error_config import (
+    DB_CONNECTION_ERROR,
+    DB_CLOSE_ERROR,
+    DB_CONNECTION_SUCCESS,
+    DB_CLOSE_SUCCESS
+)
 from .db_custom_exceptions import ConnectionError
 
 class DatabaseConnections:
@@ -14,12 +20,12 @@ class DatabaseConnections:
         if self.connection is None:
             try:
                 self.connection = sqlite3.connect(DB_PATH)
+                logger.info(DB_CONNECTION_SUCCESS)
                 return self.connection
             except sqlite3.Error as e:
-                logger.error(f"Error connecting to database: {e}")
+                logger.error(DB_CONNECTION_ERROR.format(str(e)))
                 raise ConnectionError(DB_CONNECTION_ERROR.format(str(e))) from e
         return self.connection
-       
 
     @error_handler
     def close_connection(self):
@@ -27,8 +33,9 @@ class DatabaseConnections:
             try:
                 self.connection.close()
                 self.connection = None
+                logger.info(DB_CLOSE_SUCCESS)
             except sqlite3.Error as e:
-                logger.error(f"Error closing database connection: {e}")
+                logger.error(DB_CLOSE_ERROR.format(str(e)))
                 raise ConnectionError(DB_CLOSE_ERROR.format(str(e))) from e
 
     @error_handler

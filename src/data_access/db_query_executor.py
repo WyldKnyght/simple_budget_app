@@ -25,3 +25,20 @@ class QueryExecutor:
             if conn:
                 conn.rollback()
             raise QueryExecutionError(DB_QUERY_ERROR.format(str(e))) from e
+
+    @error_handler
+    def execute_non_query(self, query, params=None):
+        conn = None
+        try:
+            conn = self.connections.get_connection()
+            cursor = conn.cursor()
+            if params:
+                cursor.execute(query, params)
+            else:
+                cursor.execute(query)
+            conn.commit()
+        except sqlite3.Error as e:
+            logger.error(f"Error executing query: {e}")
+            if conn:
+                conn.rollback()
+            raise QueryExecutionError(DB_QUERY_ERROR.format(str(e))) from e

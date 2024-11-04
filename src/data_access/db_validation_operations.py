@@ -1,8 +1,8 @@
-# src/data_access/db_schema_validator.py
+# src/data_access/db_validation_operations.py
 import os
 from utils.custom_logging import error_handler
 
-class SchemaValidator:
+class ValidationOperations:
     def __init__(self, database_manager):
         self.database_manager = database_manager
 
@@ -23,12 +23,19 @@ class SchemaValidator:
         query = "SELECT sql FROM sqlite_master WHERE type='table';"
         results = self.database_manager.execute_query(query)
         return '\n'.join(result[0] for result in results if result[0] is not None)
-    
-    @error_handler
-    def get_expected_schema(self):
-        return self.database_manager.schema_manager.load_schema()
+
+    def initialize_database(self):
+        self.database_manager.initialize_database()
+
+    def reset_database(self):
+        return self.database_manager.reset_database()
 
     def refresh(self):
         # Clear any cached schema information
-        self._current_schema = None
-        self._expected_schema = None
+        if hasattr(self, '_current_schema'):
+            del self._current_schema
+        if hasattr(self, '_expected_schema'):
+            del self._expected_schema
+            
+    def close_all_connections(self):
+        self.database_manager.close_all_connections()
