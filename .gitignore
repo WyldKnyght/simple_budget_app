@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 
 # App specific exclusions
-.admin/
+/.admin/
 .myfiles/
 models/*
 tests/
