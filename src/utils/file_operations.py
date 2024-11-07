@@ -1,7 +1,7 @@
 # src/utils/file_operations.py
 
 from utils.custom_logging import logger, error_handler
-from configs.error_config import SCHEMA_FILE_READ_ERROR
+from configs.messages_config import SCHEMA_FILE_READ_ERROR
 
 @error_handler
 def read_schema_file(schema_path):

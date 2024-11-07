@@ -1,5 +1,5 @@
 # src\data_access\db_account_operations.py
-from .database_manager import DatabaseManager
+from ..database_manager import DatabaseManager
 from configs.db_constants import (
     TABLE_ACCOUNTS, FIELD_ACCOUNT_ID, FIELD_ACCOUNT_NAME, 
     FIELD_ACCOUNT_NUMBER, FIELD_ACCOUNT_TYPE,

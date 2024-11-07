@@ -1,7 +1,7 @@
-# src\data_access\db_query_executor.py
+# src\data_access\db_modules\db_query_executor.py
 import sqlite3
 from utils.custom_logging import logger, error_handler
-from configs.error_config import DB_QUERY_ERROR
+from configs.messages_config import DB_QUERY_ERROR
 from .db_custom_exceptions import QueryExecutionError
 
 class QueryExecutor:

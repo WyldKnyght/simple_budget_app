@@ -1,23 +1,19 @@
 # src/data_access/schema_manager.py
-from utils.custom_logging import error_handler
-from .schema_operations import get_schema, get_table_names, get_table_columns
+
+from .schema_modules.schema_operations import SchemaOperations
 
 class SchemaManager:
     def __init__(self):
-        self.schema = None
+        self.schema_operations = SchemaOperations()
 
-    @error_handler
     def load_schema(self):
-        self.schema = get_schema()
+        return self.schema_operations.get_schema()
 
-    @error_handler
     def get_table_names(self):
-        if self.schema is None:
-            self.load_schema()
-        return get_table_names(self.schema)
+        return self.schema_operations.get_table_names()
 
-    @error_handler
     def get_table_columns(self, table_name):
-        if self.schema is None:
-            self.load_schema()
-        return get_table_columns(self.schema, table_name)
+        return self.schema_operations.get_table_columns(table_name)
+
+    def get_table_definitions(self):
+        return self.schema_operations.get_table_definitions()

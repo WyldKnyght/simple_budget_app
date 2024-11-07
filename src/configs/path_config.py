@@ -12,12 +12,17 @@ class EnvSettings:
         'BACKUP_PATH': 'BACKUP_PATH',
         'SCHEMA_PATH': 'SCHEMA_PATH',
         'DEFAULT_SETTINGS_PATH': 'DEFAULT_SETTINGS_PATH',
-        'UI_INI_PATH': 'UI_INI_PATH'
+        'UI_INI_PATH': 'UI_INI_PATH',
+        'DOCUMENTS_PATH': 'DOCUMENTS_PATH'
     }
 
     def __init__(self):
         for attr, env_var in self.SETTINGS.items():
-            setattr(self, attr, os.getenv(env_var))
+            value = os.getenv(env_var)
+            if value and '${PROJECT_ROOT}' in value:
+                project_root = os.getenv('PROJECT_ROOT')
+                value = value.replace('${PROJECT_ROOT}', project_root)
+            setattr(self, attr, value)
 
 env_settings = EnvSettings()
 

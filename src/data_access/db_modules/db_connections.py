@@ -1,9 +1,9 @@
-# src/data_access/db_connections.py
+# src/data_access/db_modules/db_connections.py
 
 import sqlite3
 from utils.custom_logging import logger, error_handler
 from configs.path_config import DB_PATH
-from configs.error_config import (
+from configs.messages_config import (
     DB_CONNECTION_ERROR,
     DB_CLOSE_ERROR,
     DB_CONNECTION_SUCCESS,

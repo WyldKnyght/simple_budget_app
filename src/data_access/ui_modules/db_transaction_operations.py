@@ -1,4 +1,4 @@
-from .database_manager import DatabaseManager
+from ..database_manager import DatabaseManager
 from configs.db_constants import (
     TABLE_TRANSACTIONS, FIELD_TRANSACTION_ID, FIELD_ACCOUNT_ID, FIELD_DATE,
     FIELD_PAYEE, FIELD_MEMO, FIELD_CATEGORY_ID, FIELD_PAYMENT, FIELD_DEPOSIT,

@@ -24,3 +24,16 @@ ACTION_RESET_DB = "Reset Database"
 ACTION_EXIT = "Exit"
 ACTION_ABOUT = "About"
 ACTION_HELP = "Help"
+
+# Tab Structure
+TAB_STRUCTURE = [
+    TAB_DASHBOARD,
+    TAB_ACCOUNTS,
+    TAB_CATEGORIES,
+    TAB_TRANSACTIONS,
+    TAB_EXPENSES,
+    TAB_REPORTS
+]
+
+# Warning Label Style
+WARNING_LABEL_STYLE = "background-color: yellow; color: red;"

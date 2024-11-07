@@ -60,7 +60,7 @@ The validation management system is responsible for handling all validation oper
 - `get_current_schema()`
 - `initialize_database()`
 - `reset_database()`
-- `refresh()`
+- `refresh_schema_cache()`
 
 ## Data Flow
 

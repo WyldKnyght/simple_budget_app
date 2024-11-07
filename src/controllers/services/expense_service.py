@@ -1,5 +1,5 @@
 # src/controllers/services/expense_service.py
-from data_access.db_expense_operations import ExpenseOperations
+from data_access.ui_modules.db_expense_operations import ExpenseOperations
 from data_access.schema_manager import SchemaManager
 from utils.custom_logging import error_handler
 
